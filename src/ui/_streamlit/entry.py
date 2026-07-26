@@ -22,11 +22,19 @@ def render():
     elif current_page == "Settings":
         st.write("Configure your settings here.")
 
-    elif current_page == "Character Editor":
-        render_characthereditor()
+    elif current_page == "Identity":
+        render_characteridentity()
+
+    elif current_page == "Appearance":
+        render_characterappearance()
 
     elif current_page == "Export":
-        render_jsonviewer()
+        col1, col2 = st.columns(2)
+
+        with col1:
+            render_jsonviewer()
+        with col2:
+            render_export_page()
 
     elif current_page == "Import":
         st.write("Import Panel")
