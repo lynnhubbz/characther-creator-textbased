@@ -14,6 +14,7 @@ class AnswerType(str, Enum):
     LIKERT_SCALE = "LikertScale"
     YES_NO = "YesNo"
     MULTIPLE_CHOICE = "MultipleChoice"
+    FILE_INPUT = "FileInput"
 
 
 class MULTIPLE_CHOICE:
@@ -101,13 +102,29 @@ class CharacterIdentity(BaseModel):
     occupational: OccupationalSection = Field(default_factory=OccupationalSection)
 
 # ======================================================================== #
+# APPEARANCE SECTION                                                       #
+# ======================================================================== #
+
+# Parent Class ----------------------------------------------------------- #
+
+class CharacterAppearance(BaseModel):
+    refsheet_link: list[str] = Field(
+        default_factory=list,
+        description="Relative path to images",
+        json_schema_extra={"widget": AnswerType.FILE_INPUT},
+    )
+
+# ======================================================================== #
 # MASTER CLASS                                                             #
 # ======================================================================== #
 
 class CharacterData(BaseModel):
-    id: str = Field(default="")
-    character_identity: CharacterIdentity = Field(
+    ID: str = Field(default="")
+    CHARACTER_IDENTITY: CharacterIdentity = Field(
         default_factory=CharacterIdentity
+    )
+    CHARACTER_APPEARANCE: CharacterAppearance = Field(
+        default_factory=CharacterAppearance
     )
 
 

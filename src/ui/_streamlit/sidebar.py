@@ -42,11 +42,18 @@ def render_sidebar():
     char_menu = sidebar.container(border=True)
     char_menu.header("Character")
     char_menu.button(
-        "Character Editor",
+        "Character Identity",
         icon="🧙‍♂️",
         use_container_width=True,
         on_click=set_page,
-        args=("Character Editor",),
+        args=("Identity",),
+    )
+    char_menu.button(
+        "Character Appearance",
+        icon="🧙‍♂️",
+        use_container_width=True,
+        on_click=set_page,
+        args=("Appearance",),
     )
 
     # --- Files Menu ---
