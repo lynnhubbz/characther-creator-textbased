@@ -1,7 +1,7 @@
 from enum import Enum
 from typing import Any, Dict, Literal, Optional, Tuple, get_args, get_origin
 from pydantic import BaseModel, Field
-from answers import *
+from .answers import *
 
 
 # ======================================================================== #
@@ -12,11 +12,10 @@ class AnswerType(str, Enum):
     SHORT_ANSWER = "ShortAnswer"
     LONG_ANSWER = "LongAnswer"
     LIKERT_SCALE = "LikertScale"
-    YES_NO = "YesNo"  
+    YES_NO = "YesNo"
     MULTIPLE_CHOICE = "MultipleChoice"
 
 
-# 2. Updated MultipleChoice Helper Class (Handles Optional[Literal[...]])
 class MULTIPLE_CHOICE:
 
     def __init__(self, literal_type: Any):
@@ -24,7 +23,6 @@ class MULTIPLE_CHOICE:
         self.choices: Tuple[str, ...] = self._extract_choices(literal_type)
 
     def _extract_choices(self, type_hint: Any) -> Tuple[str, ...]:
-        """Recursively extracts choices if wrapped in Optional/Union."""
         extracted = []
         for arg in get_args(type_hint):
             if get_origin(arg) is Literal:
@@ -34,7 +32,6 @@ class MULTIPLE_CHOICE:
         return tuple(extracted)
 
     def to_dict(self) -> Dict[str, Any]:
-        """Returns metadata as a dictionary for json_schema_extra."""
         return {"widget": self.widget.value, "choices": list(self.choices)}
 
 # ======================================================================== #

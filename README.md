@@ -3,10 +3,11 @@
 ## Goals
 
 1. Streamlit show json result
-2. Zipping Json + image
-3. Detailing input
-4. Immersice input
-5. Translation
-6. Firgure out plugins
-7. chronicler compat
-8. embed typst for pdf
+2. Long answer as docs/.txt
+3. Zipping Json + image
+4. Detailing input
+5. Immersice input
+6. Translation
+7. Firgure out plugins
+8. chronicler compat
+9. embed typst for pdf
