@@ -3,7 +3,7 @@ from typing import Any, Dict, Literal, Optional, Tuple, get_args, get_origin
 import streamlit as st
 from pydantic import BaseModel, Field
 
-from ....api.base import *
+from ....core.base import *
 
 def render_pydantic_section(
     section_model: BaseModel, section_key: str
