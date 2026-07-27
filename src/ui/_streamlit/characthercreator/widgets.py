@@ -5,8 +5,8 @@ import streamlit as st
 from pydantic import BaseModel
 from pydantic.fields import FieldInfo
 
-# Assuming AnswerType is imported from your core module
-from ....core.base import *
+# Assuming base.AnswerType is imported from your core module
+from ....core import base
 
 
 def _is_list_type(annotation: Any) -> bool:
@@ -90,14 +90,51 @@ def _render_file_input(
     return paths if is_list_type else (paths[0] if paths else "")
 
 
-def _render_short_answer(current_val: Any, is_list_type: bool, label: str, unique_key: str) -> Any:
-    """Render a text input. Converts lists to comma-separated strings for UI."""
+def _unwrap_annotation(annotation: Any) -> Any:
+    args = typing.get_args(annotation)
+    if len(args) == 2 and type(None) in args:
+        return next(arg for arg in args if arg is not type(None))
+    return annotation
+
+
+def _coerce_short_answer_value(raw_value: Any, annotation: Any, is_list_type: bool) -> Any:
+    if is_list_type:
+        return [item.strip() for item in str(raw_value or "").split(",") if item.strip()]
+
+    if raw_value is None:
+        return ""
+
+    text_value = str(raw_value)
+    if not text_value.strip():
+        target_type = _unwrap_annotation(annotation)
+        if target_type is int:
+            return 0
+        if target_type is float:
+            return 0.0
+        return ""
+
+    target_type = _unwrap_annotation(annotation)
+    if target_type is int:
+        try:
+            return int(text_value)
+        except ValueError:
+            return 0
+
+    if target_type is float:
+        try:
+            return float(text_value)
+        except ValueError:
+            return 0.0
+
+    return text_value
+
+
+def _render_short_answer(
+    current_val: Any, is_list: bool, label: str, unique_key: str, annotation: Any
+) -> Any:
     display_val = ", ".join(current_val) if isinstance(current_val, list) else str(current_val or "")
     user_input = st.text_input(label, value=display_val, key=unique_key)
-    
-    if is_list_type:
-        return [item.strip() for item in user_input.split(",") if item.strip()]
-    return user_input
+    return _coerce_short_answer_value(user_input, annotation, is_list)
 
 
 def _render_long_answer(current_val: Any, label: str, unique_key: str) -> str:
@@ -121,45 +158,61 @@ def _render_multiple_choice(current_val: Any, meta: dict, label: str, unique_key
     selected = st.selectbox(label, options=options, index=default_index, key=unique_key)
     return None if selected == "-- Select --" else selected
 
-
-def render_pydantic_section(section_model: BaseModel, section_key: str) -> Dict[str, Any]:
-    """
-    Dynamically maps a Pydantic model's fields to Streamlit UI widgets.
-    
-    Args:
-        section_model: The Pydantic model instance with current values.
-        section_key: A unique prefix ensuring Streamlit widget keys don't collide.
-        
-    Returns:
-        dict: The updated field values collected from the Streamlit UI.
-    """
+def render_pydantic_section(
+    section_model: BaseModel, 
+    section_key: str, 
+    skip_nested: bool = True  # <-- Add flag here (defaults to False)
+    ) -> dict:
     updated_values = {}
 
     for field_name, field_info in type(section_model).model_fields.items():
         current_val = getattr(section_model, field_name)
         label = field_info.description or field_name
-        
-        meta = field_info.json_schema_extra or {}
-        widget = meta.get("widget")
         unique_key = f"{section_key}_{field_name}"
 
+        # =================================================================
+        # 1. NESTED MODEL CHECK
+        # =================================================================
+        if isinstance(current_val, BaseModel):
+            if skip_nested:
+                continue  # <-- Skips nested models like General_Body!
+
+            st.markdown(f"#### ↳ {label}")
+            with st.container(border=True):
+                nested_updates = render_pydantic_section(
+                    current_val, unique_key, skip_nested=skip_nested
+                )
+                for k, v in nested_updates.items():
+                    setattr(current_val, k, v)
+                updated_values[field_name] = current_val
+            
+            continue
+
+        # =================================================================
+        # 2. STANDARD WIDGETS (For flat fields like strings, ints, etc.)
+        # =================================================================
+        meta = field_info.json_schema_extra or {}
+        widget = meta.get("widget") # type:ignore cuz somehow the code worked
+
         # Dispatch rendering based on widget type
-        if widget in ("FileInput", AnswerType.FILE_INPUT):
+        if widget in ("FileInput", base.AnswerType.FILE_INPUT):
             updated_values[field_name] = _render_file_input(
                 section_model, field_name, field_info, label, unique_key
             )
             
-        elif widget == AnswerType.SHORT_ANSWER:
+        elif widget == base.AnswerType.SHORT_ANSWER:
             is_list = _is_list_type(field_info.annotation)
-            updated_values[field_name] = _render_short_answer(current_val, is_list, label, unique_key)
+            updated_values[field_name] = _render_short_answer(
+                current_val, is_list, label, unique_key, field_info.annotation
+            )
             
-        elif widget == AnswerType.LONG_ANSWER:
+        elif widget == base.AnswerType.LONG_ANSWER:
             updated_values[field_name] = _render_long_answer(current_val, label, unique_key)
             
-        elif widget == AnswerType.LIKERT_SCALE:
-            updated_values[field_name] = _render_likert_scale(current_val, meta, label, unique_key)
+        elif widget == base.AnswerType.LIKERT_SCALE:
+            updated_values[field_name] = _render_likert_scale(current_val, meta, label, unique_key) # type:ignore cuz somehow the code worked
             
-        elif widget == AnswerType.MULTIPLE_CHOICE:
-            updated_values[field_name] = _render_multiple_choice(current_val, meta, label, unique_key)
+        elif widget == base.AnswerType.MULTIPLE_CHOICE:
+            updated_values[field_name] = _render_multiple_choice(current_val, meta, label, unique_key) # type:ignore cuz somehow the code worked
 
     return updated_values
