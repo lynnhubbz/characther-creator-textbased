@@ -6,11 +6,11 @@ from pydantic import BaseModel, Field
 from ....core import base
 from .widgets import *
 
-# Initialize session state for character data
+# Store uploaded  character data in session state
 if "character" not in st.session_state:
     st.session_state.character = base.CharacterData()
 
-# Store uploaded asset bytes in session state for export
+# Store uploaded assets bytes in session state
 if "pending_assets" not in st.session_state:
     st.session_state.pending_assets = {}
 
