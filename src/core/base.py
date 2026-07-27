@@ -97,13 +97,51 @@ class OccupationalSection(BaseModel):
 # Parent Class ----------------------------------------------------------- #
 
 class CharacterIdentity(BaseModel):
-    names: NameSection = Field(default_factory=NameSection)
-    gender_and_sex: GenderSexSection = Field(default_factory=GenderSexSection)
-    occupational: OccupationalSection = Field(default_factory=OccupationalSection)
+    Names: NameSection = Field(default_factory=NameSection)
+    Gender_and_Sex: GenderSexSection = Field(default_factory=GenderSexSection)
+    Occupational: OccupationalSection = Field(default_factory=OccupationalSection)
 
 # ======================================================================== #
 # APPEARANCE SECTION                                                       #
 # ======================================================================== #
+
+# General Body ----------------------------------------------------------- #
+
+class AgeSubsec(BaseModel):
+    value: float = Field(
+        default=0,
+        description="Age (In year old)",
+        json_schema_extra={"widget": AnswerType.SHORT_ANSWER}
+    )
+    BUTlooklike: float = Field(
+        default=0,
+        description="But look like age (In year old)",
+        json_schema_extra={"widget": AnswerType.SHORT_ANSWER}
+    )
+
+class GeneralBodySection(BaseModel):
+    speciesORrace: str = Field(
+        default="",
+        description="Species or Race",
+        json_schema_extra={"widget": AnswerType.SHORT_ANSWER}
+    )
+    Age: AgeSubsec = Field(
+        default_factory=AgeSubsec
+    )
+    height: float = Field(
+        default=0,
+        description="Height (in meter)",
+        json_schema_extra={"widget": AnswerType.SHORT_ANSWER}
+    )
+    weight: float = Field(
+        default=0,
+        description="Weight (in kilogram)",
+        json_schema_extra={"widget": AnswerType.SHORT_ANSWER}
+    )
+
+class ApperanceSection(BaseModel):
+    pass
+
 
 # Parent Class ----------------------------------------------------------- #
 
@@ -113,6 +151,11 @@ class CharacterAppearance(BaseModel):
         description="Relative path to images",
         json_schema_extra={"widget": AnswerType.FILE_INPUT},
     )
+    General_Body: GeneralBodySection = Field(
+        default_factory=GeneralBodySection
+    )
+
+
 
 # ======================================================================== #
 # MASTER CLASS                                                             #
