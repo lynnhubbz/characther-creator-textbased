@@ -16,6 +16,7 @@ def render():
     # 3. Render Main Content based on selection
     st.title(f"📍 {current_page}")
 
+
     if current_page == "Intro":
         st.write("Welcome to the application!")
 
@@ -29,12 +30,9 @@ def render():
         render_characterappearance()
 
     elif current_page == "Export":
-        col1, col2 = st.columns(2)
-
-        with col1:
-            render_jsonviewer()
-        with col2:
-            render_export_page()
+        render_exportpage()
 
     elif current_page == "Import":
         st.write("Import Panel")
+
+# @todo second column for informations
