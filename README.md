@@ -1,8 +1,21 @@
 # Textbased Characther Creator!
 
+![Static Badge](https://img.shields.io/badge/Converting%20sheets%20to%20codes-6.17%25-blue?style=for-the-badge)
+
+
 A simple (if you can say) text-based character creator.
+This project is just the implementation of various reference i got online of characther creator sheets (*which i forgot where i got it, and will mention it when possible*).
+
+Initially made for my own worldbuilding projects, but found it useful! Previosly made as Excel and Google Form, but i learned programming lately.
+
+Also join Astrocosmos!
 
 ## Feature
+
+- **Detailed character form**, or make a simple and compact one!
+- **Characters' data are stored in JSON**, and can be bundled with other information such image and text in a ZIP!
+
+Planned feature can be seen in [Plans document](/docs/plans.md)
 
 ### Privacy
 
@@ -19,43 +32,17 @@ if "pending_assets" not in st.session_state:
     st.session_state.pending_assets = {}
 ```
 
-## Getting Started
-
 ## Usage
 
 if you are familiar with programming, you can use the Jupyter Notebook file in the [`ipynb/` folder](/ipynb/APP.ipynb)
 
-You can make the set
+If you want a more friendly interface, you can go to the pinned site here
 
-## Goals
+**Installation**. The executable program version of this project is not yet (or possible will be never) available. For the mean time, use the web-app.
 
-Update 0
+## Miscellaneous
 
-1. [X] show json result for ui
-2. [X] Zipping Json + image
-   1. [X] Zip directory map preview
-3. Detailing input
-   1. Apply settings
-   2. Multiple short answer input as item list
-4. Export option
-   1. Introduce import
-   2. Options and feature for Long answer as docs/.txt
-   3. Tidy it up
-   4. add suggestion textto convert the json at <https://markdownme.com/tools/config-converter>
+**LICENSE**. This software is licensed under "i'm so tired" software license 1.0 (no resale ver.)
 
-Update 1
+**CONTRIBUTING**.
 
-0. Documentation
-   1. Adding and complete the documents for the whole project <https://markdownme.com/github>
-   2. Add logo: script and quill
-   3. Add image so user can better imagine it
-1. Immersive multichoice input for ui
-2. Randomizer Generator
-
-Update 2
-
-4. Translation
-5. Worldbuilding tool compat
-   1. Chronicler
-6. Firgure out plugins
-7. embed typst for pdfs
