@@ -1,7 +1,7 @@
 # Textbased Characther Creator!
 
-![Static Badge](https://img.shields.io/badge/Converting%20sheets%20to%20codes-6.17%25-blue?style=for-the-badge)[Detailing Guides: 0%](https://img.shields.io/badge/Detailing%20Guides%20-0%25-blue?style=for-the-badge))le=for-the-badge))e=for-the-badge)))))))))))))))))))badge))))))))))))))))))
-[Detailing Guides: 0%](https://img.shields.io/badge/Detailing%20Guides%20-0%25-blue?style=for-the-badge))le=for-the-badge))e=for-the-badge)
+![Static Badge](https://img.shields.io/badge/Converting%20sheets%20to%20codes-6.17%25-blue?style=for-the-badge)
+![Static Badge](https://img.shields.io/badge/Detailing%20Guides%20-0%25-blue?style=for-the-badge)
 
 
 A simple (if you can say) text-based character creator.
