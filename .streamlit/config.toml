@@ -1,0 +1,65 @@
+[server]
+enableStaticServing = true
+
+[theme]
+baseFontSize = 17
+
+[[theme.fontFaces]]
+family = "ComicNeue"
+url = "app/static/ComicNeue-Regular.ttf"
+style = "normal"
+weight = 400
+
+[[theme.fontFaces]]
+family = "ComicNeue"
+url = "app/static/ComicNeue-Bold.ttf"
+style = "normal"
+weight = 700
+
+[[theme.fontFaces]]
+family = "Fredoka"
+url = "app/static/Fredoka-Regular.ttf"
+style = "normal"
+weight = 400
+
+[[theme.fontFaces]]
+family = "SourceCodePro"
+url = "app/static/SourceCodePro-Regular.ttf"
+style = "normal"
+weight = 400
+
+[theme.light]
+# 🌈 TODDLER RAINBOW PALETTE 🌈
+primaryColor = "#ff6b6b"             # Warm coral red - friendly, not scary
+backgroundColor = "#fff9e6"          # Soft cream yellow - warm, cozy like sunshine
+secondaryBackgroundColor = "#f0f8ff" # Alice blue - soft, cloud-like
+textColor = "#2d3436"                # Soft dark gray - comfortable to read
+linkColor = "#fd79a8"                # Playful pink - fun but readable
+borderColor = "#305b87"              # Sky blue borders - cheerful and bright
+baseRadius = "1rem"                  # Extra rounded - soft, safe, huggable
+font = "ComicNeue"                   # Comic Neue - child-friendly, clear
+headingFont = "Fredoka"              # Fredoka - fun, bouncy display font
+codeFont = "SourceCodePro"           # Just in case!
+codeBackgroundColor = "#e8f4fd"      # Light blue code background
+
+[theme.light.sidebar]
+backgroundColor = "#e8f4fd"          # Soft blue - like a cozy nursery
+secondaryBackgroundColor = "#fff0f5" # Lavender blush - gentle and sweet
+
+[theme.dark]
+# 🌙 TODDLER NIGHT-SKY RAINBOW PALETTE 🌙
+primaryColor = "#ff8585"             # Soft pastel coral red - bright but gentle on dark backgrounds
+backgroundColor = "#12141c"          # Deep midnight blue - soft dark canvas, not harsh black
+secondaryBackgroundColor = "#1e2230" # Cozy cloud gray-blue - distinct widget containers
+textColor = "#f1f3f5"                # Crisp, soft white - comfortable nighttime reading
+linkColor = "#ff9eb5"                # Bouncy pastel pink - pops nicely on dark backgrounds
+borderColor = "#4a6fa5"              # Muted sky blue - soft, visible borders
+baseRadius = "1rem"                  # Extra rounded - still soft, safe, huggable
+font = "ComicNeue"                   # Comic Neue - child-friendly, clear
+headingFont = "Fredoka"              # Fredoka - fun, bouncy display font
+codeFont = "SourceCodePro"           # Clear coding font
+codeBackgroundColor = "#1a2636"      # Deep navy tint for code blocks
+
+[theme.dark.sidebar]
+backgroundColor = "#1a202c"          # Cozy evening blue - distinct but dark nursery sidebar
+secondaryBackgroundColor = "#2d2230" # Deep lavender blush - gentle, dark contrast
