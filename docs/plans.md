@@ -16,7 +16,7 @@
    1. Introduce import
    2. Options and feature for Long answer as docs/.txt
    3. Tidy it up
-   4. add suggestion textto convert the json at <https://markdownme.com/tools/config-converter>
+   4. add suggestion text to convert the json at <https://markdownme.com/tools/config-converter>
 
 ## In-Dev  Update 1
 
@@ -24,23 +24,27 @@
    1. Adding and complete the documents for the whole project <https://markdownme.com/github>
    2. Add logo: script and quill
    3. Add image so user can better imagine it
-1. Immersive multichoice input for ui
+1. Compact UI Layout: like form
+2. Immersive multichoice input for ui
    1. Should make it built in or left it as a link
-2. Randomizer Generator
+3. Randomizer Generator
 
 ## In-Dev Update 2
 
 4. Translation
 5. compat with Chronicler
-6. Figure out plugins
-7. embed typst for pdfs
+6. Figure out plugins for
+   1. Other utility (overhauling the options)
+   2. Adding options
+7. generate obsidian markdown character document
+8. embed typst for pdfs
 
 ## Major Update 1
 
 0. MAJOR BREAKING CHANGE
    1. Refactors
    2. Performance
-1. Themes so it doesnt be boring
+1. (TEMPORARY) Themes so it doesnt be boring
 2. Option for Music
 
 # Planned Compatibilities

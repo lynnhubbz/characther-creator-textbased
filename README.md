@@ -1,6 +1,7 @@
 # Textbased Characther Creator!
 
-![Static Badge](https://img.shields.io/badge/Converting%20sheets%20to%20codes-6.17%25-blue?style=for-the-badge)
+![Static Badge](https://img.shields.io/badge/Converting%20sheets%20to%20codes-6.17%25-blue?style=for-the-badge)[Detailing Guides: 0%](https://img.shields.io/badge/Detailing%20Guides%20-0%25-blue?style=for-the-badge))le=for-the-badge))e=for-the-badge)))))))))))))))))))badge))))))))))))))))))
+[Detailing Guides: 0%](https://img.shields.io/badge/Detailing%20Guides%20-0%25-blue?style=for-the-badge))le=for-the-badge))e=for-the-badge)
 
 
 A simple (if you can say) text-based character creator.
@@ -13,14 +14,14 @@ Also join Astrocosmos!
 ## Feature
 
 - **Detailed character form**, or make a simple and compact one!
-- **Characters' data are stored in JSON**, and can be bundled with other information such image and text in a ZIP!
+- **Characters' data are stored in JSON**, and can be bundled with other information such image (and, coming soon, text) in a ZIP!
 
 Planned feature can be seen in [Plans document](/docs/plans.md)
 
 ### Privacy
 
 All the things you uploaded to the [] interface are safe and stored in your device cache. 
-This is done by the `streamlit`'s code `session_state` written in [one of the script](.src\ui\_streamlit\characthercreator\__init__.py) as shown below
+This is done by the `streamlit`'s code `session_state` written in [one of the script](.src/ui/_streamlit/characthercreator/__init__.py) as shown below
 
 ```python
 # Store uploaded  character data in session state
@@ -42,7 +43,7 @@ If you want a more friendly interface, you can go to the pinned site here
 
 ## Miscellaneous
 
-**LICENSE**. This software is licensed under "i'm so tired" software license 1.0 (no resale ver.)
+**LICENSE**. currently, This software is licensed under "i'm so tired" software license 1.0 (no resale ver.)
 
 **CONTRIBUTING**.
 
