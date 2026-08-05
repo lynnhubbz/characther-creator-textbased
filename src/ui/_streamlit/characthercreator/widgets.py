@@ -1,11 +1,12 @@
 import typing
 from typing import Any, Dict, Optional
+from uuid import uuid4
 
 import streamlit as st
 from pydantic import BaseModel
 from pydantic.fields import FieldInfo
+from streamlit_sortables import sort_items
 
-# Assuming base.AnswerType is imported from your core module
 from ....core import base
 
 
@@ -156,7 +157,113 @@ def _render_multiple_choice(current_val: Any, meta: dict, label: str, unique_key
     default_index = options.index(current_val) if current_val in choices else 0
     
     selected = st.selectbox(label, options=options, index=default_index, key=unique_key)
+    
     return None if selected == "-- Select --" else selected
+
+def _render_multiple_choice_custom(
+    current_val: Any, meta: dict, label: str, unique_key: str
+) -> Optional[str]:
+    """Render a dropdown selectbox with an 'Other...' option for custom text input."""
+    choices = meta.get("choices", [])
+    custom_option = "Other..."
+    options = ["-- Select --"] + choices + [custom_option]
+
+    # Calculate default index
+    default_index = 0
+    if current_val in choices:
+        default_index = options.index(current_val)
+    elif current_val:  # Has a value, but not in standard choices -> custom value
+        default_index = options.index(custom_option)
+
+    # 1. Render Dropdown
+    selected = st.selectbox(
+        label, options=options, index=default_index, key=f"{unique_key}_select"
+    )
+
+    if selected == "-- Select --":
+        return None
+
+    # 2. Render Custom Input if "Other..." is selected
+    if selected == custom_option:
+        # Pre-fill text box if current value is a custom string
+        default_custom_text = str(current_val) if current_val and current_val not in choices else ""
+        
+        custom_input = st.text_input(
+            f"Specify custom value for {label}:",
+            value=default_custom_text,
+            key=f"{unique_key}_custom_text",
+            placeholder="Type custom entry here...",
+        )
+        return custom_input.strip() if custom_input.strip() else None
+
+    return selected
+
+def _normalize_multi_short_items(current_val: Any) -> list[dict[str, str]]:
+    if not current_val:
+        return [{"id": str(uuid4()), "value": ""}]
+
+    normalized: list[dict[str, str]] = []
+
+    for item in current_val:
+        if isinstance(item, dict):
+            normalized.append({
+                "id": str(item.get("id") or uuid4()),
+                "value": str(item.get("value", ""))
+            })
+        else:
+            normalized.append({
+                "id": str(uuid4()),
+                "value": str(item)
+            })
+
+    return normalized
+
+def _render_multiple_short_answer(
+    current_val: Any,
+    label: str,
+    unique_key: str
+) -> list[str]:
+
+    state_key = f"{unique_key}_items"
+
+    if state_key not in st.session_state:
+        st.session_state[state_key] = _normalize_multi_short_items(current_val)
+
+    items = st.session_state[state_key]
+
+    st.caption(label)
+
+    if st.button("＋ Add", key=f"{unique_key}_add"):
+        items.append({"id": str(uuid4()), "value": ""})
+        st.session_state[state_key] = items
+        st.rerun()
+
+    cleaned_items: list[dict[str, str]] = []
+
+    for item in items:
+        item_id = item["id"]
+        item_value = item["value"]
+
+        col_input, col_delete = st.columns([5, 1])
+
+        with col_input:
+            new_value = st.text_input(
+                "",
+                value=item_value,
+                key=f"{unique_key}_{item_id}",
+                label_visibility="collapsed",
+            )
+            cleaned_items.append({"id": item_id, "value": new_value})
+
+        with col_delete:
+            if st.button("🗑", key=f"{unique_key}_del_{item_id}"):
+                items = [row for row in items if row["id"] != item_id]
+                st.session_state[state_key] = items
+                st.rerun()
+
+    st.session_state[state_key] = cleaned_items
+    
+    return [row["value"].strip() for row in cleaned_items if row["value"].strip()]
 
 def render_pydantic_section(
     section_model: BaseModel, 
@@ -215,4 +322,14 @@ def render_pydantic_section(
         elif widget == base.AnswerType.MULTIPLE_CHOICE:
             updated_values[field_name] = _render_multiple_choice(current_val, meta, label, unique_key) # type:ignore cuz somehow the code worked
 
+        elif widget == base.AnswerType.MULTIPLE_CHOICE_CUSTOM:
+            updated_values[field_name] = _render_multiple_choice_custom(
+                current_val, meta, label, unique_key
+            )
+
+        elif widget == base.AnswerType.MULTIPLE_SHORT_ANSWER:
+            updated_values[field_name] = _render_multiple_short_answer(
+                current_val, label, unique_key
+            )
     return updated_values
+

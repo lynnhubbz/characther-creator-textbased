@@ -42,11 +42,11 @@ def render_sidebar():
     char_menu = sidebar.container(border=True)
     char_menu.header("Character")
     char_menu.button(
-        "Identity",
+        "General",
         icon="🧙‍♂️",
         use_container_width=True,
         on_click=set_page,
-        args=("Identity",),
+        args=("General",),
     )
     char_menu.button(
         "Appearance",

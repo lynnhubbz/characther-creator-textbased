@@ -8,25 +8,22 @@ from ....core.filemanager import *
 
 jsonindent = 4
 
-json_str = char.model_dump_json(indent=4)
-
-assets_dict = st.session_state.get("pending_assets", {})
-
-zip_bytes = create_character_bundle(
-    character_json=json_str,
-    assets=assets_dict
-)
-
 def render_exportpage():
-    
+    char = st.session_state.character
+    assets_dict = st.session_state.get("pending_assets", {})
+
+    json_str = char.model_dump_json(indent=4)
+    zip_bytes = create_character_bundle(
+        character_json=json_str,
+        assets=assets_dict
+    )
+
     st.caption("Saved file will contain direct key-value mapping with `null` defaults.")
-    
-    col1, col2 = st.columns([2,3], border=True)
 
-    with col1:
+    col1, col2 = st.columns([3, 2], border=True)
 
+    with col2:
         st.header("Downloads")
-
         st.download_button(
             label="💾 Download Character JSON",
             data=json_str,
@@ -35,24 +32,21 @@ def render_exportpage():
             use_container_width=True
         )
 
-            # 4. Download Button
         st.download_button(
             label="Download .zip Bundle",
             data=zip_bytes,
-            file_name=f"{char.CHARACTER_IDENTITY.Names.full_name or 'character'}_bundle.zip",
+            file_name=f"{char.CHARACTER_GENERAL.Names.full_name or 'character'}_bundle.zip",
             mime="application/zip",
             use_container_width=True
         )
 
         st.subheader("Settings")
 
-    with col2:
+    with col1:
         st.header("Previews")
-
         st.subheader("Directory Map Preview")
         tree_lines = generate_directory_preview(list(assets_dict.keys()))
         st.code("\n".join(tree_lines), language="text")
-    
+
         st.subheader("📄 Live Exported JSON")
         st.code(json_str, language="json")
-        

@@ -27,7 +27,7 @@ def _auto_render(sections):
         
         skip_nested = skip_nested[0] if skip_nested else True
         
-        st.header(title)
+        st.markdown(title)
         
         col1, col2 = st.columns([5, 3], border=True)
         with col1:
@@ -40,18 +40,22 @@ def _auto_render(sections):
             for field_name, new_value in updates.items():
                 setattr(section_obj, field_name, new_value)
 
-def render_characteridentity():
+def render_charactergeneral():
 
     st.caption("lorem ipsum dolor sit amet")
 
     st.divider()
     
-    sections = [
-        ("👤 Names", char.CHARACTER_IDENTITY.Names, "names"),
-        ("⚧ Gender & Sexuality", char.CHARACTER_IDENTITY.Gender_and_Sex, "gender_sex"),
-        ("💼 Occupation & Details", char.CHARACTER_IDENTITY.Occupational, "occupational"),
+    section1 = [
+        ("## 👤 Names", char.CHARACTER_GENERAL.Names, "names"),
     ]
-    _auto_render(sections)
+    _auto_render(section1)
+
+    section2 = [
+        ("## ⚧ Gender & Sexuality", char.CHARACTER_GENERAL.Gender_and_Sex, "gender_sex"),
+        ("## 💼 Occupation & Details", char.CHARACTER_GENERAL.Occupational, "occupational"),
+    ]
+    _auto_render(section2)
 
 def render_characterappearance():
     st.caption("lorem ipsum dolor sit amet")
@@ -60,8 +64,14 @@ def render_characterappearance():
 
     sections = [
         # (Title, Object, Key, Skip Nested Models?)
-        ("👤 RefSheet", char.CHARACTER_APPEARANCE, "character_appearance", True),  # <-- Only renders refsheet_link
-        ("💼 General Body", char.CHARACTER_APPEARANCE.General_Body, "General_Body", False), # <-- Renders General_Body + Age
+        ("## 👤 RefSheet", char.CHARACTER_APPEARANCE, "character_appearance", True),  # <-- Only renders refsheet_link
+        ("## 💼 General Body", char.CHARACTER_APPEARANCE.GeneralBody, "GeneralBody", False), # <-- Renders General_Body + Age
+        ("## Apperance", char.CHARACTER_APPEARANCE.Appearance, "Appearance", False),
+        
+        ("## Voice", char.CHARACTER_APPEARANCE.Voice, "Voice", False),
+
+        ("## Head", char.CHARACTER_APPEARANCE.Head, "Head", False),
+        
     ]
 
     _auto_render(sections)
