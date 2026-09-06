@@ -70,7 +70,7 @@ class CharacterGeneral(BaseModel):
     Occupational: OccupationalSection = Field(default_factory=OccupationalSection)
 
 # ======================================================================== #
-# APPEARANCE SECTION                                                       #
+# CHARACTERISTIC SECTION                                                       #
 # ======================================================================== #
 
 # General Body ----------------------------------------------------------- #
@@ -161,13 +161,14 @@ class VoiceSection(BaseModel):
 
 # Head ------------------------------------------------------------------- #
 
+FaceShapeChoice = MULTIPLE_CHOICE_CUSTOM(FACE_SHAPE).to_dict()
 HairTypeChoice = MULTIPLE_CHOICE(HAIR_TYPE).to_dict()
 
 class HeadSection(BaseModel):
     face_shape: str = Field(
         default="",
         description="Face Shape",
-        json_schema_extra={"ui_component": AnswerType.SHORT_ANSWER}
+        json_schema_extra=FaceShapeChoice
     )
     hair_type: str = Field(
         default="",
@@ -196,6 +197,60 @@ class HeadSection(BaseModel):
     )
 
 
+# Health ----------------------------------------------------------------- #
+
+class HealthSection(BaseModel):
+    health: int = Field(
+        default=3,
+        description="Healthiness. How strong the immnunity, or how often they get sick",
+        json_schema_extra={"ui_component": AnswerType.LIKERT_SCALE}
+    )
+    hygiene: int = Field(
+        default=3,
+        description="Hygiene",
+        json_schema_extra={"ui_component": AnswerType.LIKERT_SCALE}
+    )
+    allergies: list[str] = Field(
+        default_factory=list,
+        description="Allergies",
+        json_schema_extra={"ui_component": AnswerType.MULTIPLE_SHORT_ANSWER}
+    )
+    weaknesses: list[str] = Field(
+        default_factory=list,
+        description="Weaknesses",
+        json_schema_extra={"ui_component": AnswerType.MULTIPLE_SHORT_ANSWER}
+    )
+
+# Clothing --------------------------------------------------------------- #
+
+class ClothingSection(BaseModel):
+    outfit_usual: list[str] = Field(
+        default_factory=list,
+        description="Usual Fashion",
+        json_schema_extra={"ui_component": AnswerType.MULTIPLE_SHORT_ANSWER}
+    )
+    outfit_favorite: list[str] = Field(
+        default_factory=list,
+        description="Favorite outfit",
+        json_schema_extra={"ui_component": AnswerType.MULTIPLE_SHORT_ANSWER}
+    )
+    accessories: list[str] = Field(
+        default_factory=list,
+        description="Accessories",
+        json_schema_extra={"ui_component": AnswerType.MULTIPLE_SHORT_ANSWER}
+    )
+    beauty: int = Field(
+        default=3,
+        description="Beauy. How much beauty they have",
+        json_schema_extra={"ui_component": AnswerType.LIKERT_SCALE}
+    )
+    style: int = Field(
+        default=3,
+        description="Style",
+        json_schema_extra={"ui_component": AnswerType.LIKERT_SCALE}
+    )
+
+
 # Parent Class ----------------------------------------------------------- #
 
 class CharacterAppearance(BaseModel):
@@ -216,7 +271,12 @@ class CharacterAppearance(BaseModel):
     Head: HeadSection = Field(
         default_factory=HeadSection
     )
-
+    Health: HealthSection = Field(
+        default_factory=HealthSection
+    )
+    Clothings: ClothingSection = Field(
+        default_factory=ClothingSection
+    )
 
 
 # ======================================================================== #

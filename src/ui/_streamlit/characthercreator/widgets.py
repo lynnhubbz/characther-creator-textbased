@@ -151,10 +151,10 @@ def _render_likert_scale(current_val: Any, meta: dict, label: str, unique_key: s
 
 
 def _render_multiple_choice(current_val: Any, meta: dict, label: str, unique_key: str) -> Optional[str]:
-    """Render a dropdown selectbox based on schema metadata choices."""
-    choices = meta.get("choices", [])
-    options = ["-- Select --"] + choices
-    default_index = options.index(current_val) if current_val in choices else 0
+    """Render a dropdown selectbox based on schema metadata options."""
+    options = meta.get("options", [])
+    options = ["-- Select --"] + options
+    default_index = options.index(current_val) if current_val in options else 0
     
     selected = st.selectbox(label, options=options, index=default_index, key=unique_key)
     
@@ -164,15 +164,15 @@ def _render_multiple_choice_custom(
     current_val: Any, meta: dict, label: str, unique_key: str
 ) -> Optional[str]:
     """Render a dropdown selectbox with an 'Other...' option for custom text input."""
-    choices = meta.get("choices", [])
+    options = meta.get("options", [])
     custom_option = "Other..."
-    options = ["-- Select --"] + choices + [custom_option]
+    options = ["-- Select --"] + options + [custom_option]
 
     # Calculate default index
     default_index = 0
-    if current_val in choices:
+    if current_val in options:
         default_index = options.index(current_val)
-    elif current_val:  # Has a value, but not in standard choices -> custom value
+    elif current_val:  # Has a value, but not in standard options -> custom value
         default_index = options.index(custom_option)
 
     # 1. Render Dropdown
@@ -186,7 +186,7 @@ def _render_multiple_choice_custom(
     # 2. Render Custom Input if "Other..." is selected
     if selected == custom_option:
         # Pre-fill text box if current value is a custom string
-        default_custom_text = str(current_val) if current_val and current_val not in choices else ""
+        default_custom_text = str(current_val) if current_val and current_val not in options else ""
         
         custom_input = st.text_input(
             f"Specify custom value for {label}:",
@@ -299,35 +299,35 @@ def render_pydantic_section(
         # 2. STANDARD WIDGETS (For flat fields like strings, ints, etc.)
         # =================================================================
         meta = field_info.json_schema_extra or {}
-        widget = meta.get("widget") # type:ignore cuz somehow the code worked
+        ui_component = meta.get("ui_component") # type:ignore cuz somehow the code worked
 
-        # Dispatch rendering based on widget type
-        if widget in ("FileInput", base.AnswerType.FILE_INPUT):
+        # Dispatch rendering based on ui_component type
+        if ui_component in ("FileInput", base.AnswerType.FILE_INPUT):
             updated_values[field_name] = _render_file_input(
                 section_model, field_name, field_info, label, unique_key
             )
             
-        elif widget == base.AnswerType.SHORT_ANSWER:
+        elif ui_component == base.AnswerType.SHORT_ANSWER:
             is_list = _is_list_type(field_info.annotation)
             updated_values[field_name] = _render_short_answer(
                 current_val, is_list, label, unique_key, field_info.annotation
             )
             
-        elif widget == base.AnswerType.LONG_ANSWER:
+        elif ui_component == base.AnswerType.LONG_ANSWER:
             updated_values[field_name] = _render_long_answer(current_val, label, unique_key)
             
-        elif widget == base.AnswerType.LIKERT_SCALE:
+        elif ui_component == base.AnswerType.LIKERT_SCALE:
             updated_values[field_name] = _render_likert_scale(current_val, meta, label, unique_key) # type:ignore cuz somehow the code worked
             
-        elif widget == base.AnswerType.MULTIPLE_CHOICE:
+        elif ui_component == base.AnswerType.MULTIPLE_CHOICE:
             updated_values[field_name] = _render_multiple_choice(current_val, meta, label, unique_key) # type:ignore cuz somehow the code worked
 
-        elif widget == base.AnswerType.MULTIPLE_CHOICE_CUSTOM:
+        elif ui_component == base.AnswerType.MULTIPLE_CHOICE_CUSTOM:
             updated_values[field_name] = _render_multiple_choice_custom(
                 current_val, meta, label, unique_key
             )
 
-        elif widget == base.AnswerType.MULTIPLE_SHORT_ANSWER:
+        elif ui_component == base.AnswerType.MULTIPLE_SHORT_ANSWER:
             updated_values[field_name] = _render_multiple_short_answer(
                 current_val, label, unique_key
             )

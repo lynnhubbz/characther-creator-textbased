@@ -71,6 +71,10 @@ def render_characterappearance():
         ("## Voice", char.CHARACTER_APPEARANCE.Voice, "Voice", False),
 
         ("## Head", char.CHARACTER_APPEARANCE.Head, "Head", False),
+
+        ("## Health", char.CHARACTER_APPEARANCE.Health, "Health", False),
+
+        ("## Clothing", char.CHARACTER_APPEARANCE.Clothings, "Clothing", False)
         
     ]
 
