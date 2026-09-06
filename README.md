@@ -1,6 +1,6 @@
 # Textbased Characther Creator!
 
-![Static Badge](https://img.shields.io/badge/Converting%20sheets%20to%20codes-6.17%25-blue?style=for-the-badge)
+![Static Badge](https://img.shields.io/badge/Converting%20sheets%20to%20codes-15.42%25-blue?style=for-the-badge)
 ![Static Badge](https://img.shields.io/badge/Detailing%20Guides%20-0%25-blue?style=for-the-badge)
 
 
@@ -47,3 +47,8 @@ If you want a more friendly interface, you can go to the pinned site here
 
 **CONTRIBUTING**.
 
+---
+
+I think this project's partly goal is similar to [LoreFlow](https://github.com/Galygious/Lore-Flow) 
+
+Even so, this project was been made long before i knew LoreFlow existed.
