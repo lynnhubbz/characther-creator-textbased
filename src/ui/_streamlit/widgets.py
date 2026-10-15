@@ -7,7 +7,7 @@ from pydantic import BaseModel
 from pydantic.fields import FieldInfo
 from streamlit_sortables import sort_items
 
-from ....core import base
+from src.core import base
 
 
 def _is_list_type(annotation: Any) -> bool:
@@ -253,7 +253,7 @@ def _render_multiple_short_answer(
                 key=f"{unique_key}_{item_id}",
                 label_visibility="collapsed",
             )
-            cleaned_items.append({"id": item_id, "value": new_value})
+            cleaned_items.append({"id": item_id, "value": new_value}) #type: ignore
 
         with col_delete:
             if st.button("🗑", key=f"{unique_key}_del_{item_id}"):
@@ -324,7 +324,10 @@ def render_pydantic_section(
 
         elif ui_component == base.AnswerType.MULTIPLE_CHOICE_CUSTOM:
             updated_values[field_name] = _render_multiple_choice_custom(
-                current_val, meta, label, unique_key
+                current_val, 
+                meta, #type: ignore 
+                label, 
+                unique_key 
             )
 
         elif ui_component == base.AnswerType.MULTIPLE_SHORT_ANSWER:

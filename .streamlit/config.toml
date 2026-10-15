@@ -28,38 +28,139 @@ url = "app/static/SourceCodePro-Regular.ttf"
 style = "normal"
 weight = 400
 
+# Catppuccin Latte (light) + Macchiato (dark), accent mauve
+# Streamlit follows the OS setting, or Settings -> Theme.
+
 [theme.light]
-# 🌈 TODDLER RAINBOW PALETTE 🌈
-primaryColor = "#ff6b6b"             # Warm coral red - friendly, not scary
-backgroundColor = "#fff9e6"          # Soft cream yellow - warm, cozy like sunshine
-secondaryBackgroundColor = "#f0f8ff" # Alice blue - soft, cloud-like
-textColor = "#2d3436"                # Soft dark gray - comfortable to read
-linkColor = "#fd79a8"                # Playful pink - fun but readable
-borderColor = "#305b87"              # Sky blue borders - cheerful and bright
-baseRadius = "1rem"                  # Extra rounded - soft, safe, huggable
-font = "ComicNeue"                   # Comic Neue - child-friendly, clear
-headingFont = "Fredoka"              # Fredoka - fun, bouncy display font
-codeFont = "SourceCodePro"           # Just in case!
-codeBackgroundColor = "#e8f4fd"      # Light blue code background
+primaryColor = "#8839ef"
+backgroundColor = "#eff1f5"
+secondaryBackgroundColor = "#ccd0da"
+textColor = "#4c4f69"
+borderColor = "#bcc0cc"
+linkColor = "#1e66f5"
+codeBackgroundColor = "#e6e9ef"
+codeTextColor = "#4c4f69"
+dataframeBorderColor = "#bcc0cc"
+dataframeHeaderBackgroundColor = "#e6e9ef"
+dataframeHeaderTextColor = "#5c5f77"
+redColor = "#d20f39"
+redTextColor = "#d20f39"
+orangeColor = "#fe640b"
+orangeTextColor = "#fe640b"
+yellowColor = "#df8e1d"
+yellowTextColor = "#df8e1d"
+greenColor = "#40a02b"
+greenTextColor = "#40a02b"
+blueColor = "#1e66f5"
+blueTextColor = "#1e66f5"
+violetColor = "#8839ef"
+violetTextColor = "#8839ef"
+grayColor = "#8c8fa1"
+grayTextColor = "#6c6f85"
+chartCategoricalColors = [
+  "#1e66f5",
+  "#fe640b",
+  "#40a02b",
+  "#8839ef",
+  "#df8e1d",
+  "#179299",
+  "#d20f39",
+  "#ea76cb",
+  "#7287fd",
+  "#04a5e5",
+]
+chartSequentialColors = [
+  "#bcc0cc",
+  "#abb8d2",
+  "#9bafd8",
+  "#8aa6dd",
+  "#799de2",
+  "#6893e6",
+  "#5789eb",
+  "#467eee",
+  "#3373f2",
+  "#1e66f5",
+]
+chartDivergingColors = [
+  "#d20f39",
+  "#cf4c58",
+  "#ca6d75",
+  "#c18a92",
+  "#b5a4af",
+  "#9da9c6",
+  "#809cd3",
+  "#628ce0",
+  "#427beb",
+  "#1e66f5",
+]
 
 [theme.light.sidebar]
-backgroundColor = "#e8f4fd"          # Soft blue - like a cozy nursery
-secondaryBackgroundColor = "#fff0f5" # Lavender blush - gentle and sweet
+backgroundColor = "#e6e9ef"
+secondaryBackgroundColor = "#ccd0da"
 
 [theme.dark]
-# 🌙 TODDLER NIGHT-SKY RAINBOW PALETTE 🌙
-primaryColor = "#ff8585"             # Soft pastel coral red - bright but gentle on dark backgrounds
-backgroundColor = "#12141c"          # Deep midnight blue - soft dark canvas, not harsh black
-secondaryBackgroundColor = "#1e2230" # Cozy cloud gray-blue - distinct widget containers
-textColor = "#f1f3f5"                # Crisp, soft white - comfortable nighttime reading
-linkColor = "#ff9eb5"                # Bouncy pastel pink - pops nicely on dark backgrounds
-borderColor = "#4a6fa5"              # Muted sky blue - soft, visible borders
-baseRadius = "1rem"                  # Extra rounded - still soft, safe, huggable
-font = "ComicNeue"                   # Comic Neue - child-friendly, clear
-headingFont = "Fredoka"              # Fredoka - fun, bouncy display font
-codeFont = "SourceCodePro"           # Clear coding font
-codeBackgroundColor = "#1a2636"      # Deep navy tint for code blocks
+primaryColor = "#c6a0f6"
+backgroundColor = "#24273a"
+secondaryBackgroundColor = "#363a4f"
+textColor = "#cad3f5"
+borderColor = "#494d64"
+linkColor = "#8aadf4"
+codeBackgroundColor = "#1e2030"
+codeTextColor = "#cad3f5"
+dataframeBorderColor = "#494d64"
+dataframeHeaderBackgroundColor = "#1e2030"
+dataframeHeaderTextColor = "#b8c0e0"
+redColor = "#ed8796"
+redTextColor = "#ed8796"
+orangeColor = "#f5a97f"
+orangeTextColor = "#f5a97f"
+yellowColor = "#eed49f"
+yellowTextColor = "#eed49f"
+greenColor = "#a6da95"
+greenTextColor = "#a6da95"
+blueColor = "#8aadf4"
+blueTextColor = "#8aadf4"
+violetColor = "#c6a0f6"
+violetTextColor = "#c6a0f6"
+grayColor = "#8087a2"
+grayTextColor = "#a5adcb"
+chartCategoricalColors = [
+  "#8aadf4",
+  "#f5a97f",
+  "#a6da95",
+  "#c6a0f6",
+  "#eed49f",
+  "#8bd5ca",
+  "#ed8796",
+  "#f5bde6",
+  "#b7bdf8",
+  "#91d7e3",
+]
+chartSequentialColors = [
+  "#494d64",
+  "#505773",
+  "#576182",
+  "#5e6c91",
+  "#6576a1",
+  "#6d81b1",
+  "#748cc2",
+  "#7b97d2",
+  "#83a2e3",
+  "#8aadf4",
+]
+chartDivergingColors = [
+  "#ed8796",
+  "#cc7f90",
+  "#ac7789",
+  "#8c6e83",
+  "#6b657c",
+  "#606885",
+  "#6b79a0",
+  "#758abb",
+  "#7f9bd7",
+  "#8aadf4",
+]
 
 [theme.dark.sidebar]
-backgroundColor = "#1a202c"          # Cozy evening blue - distinct but dark nursery sidebar
-secondaryBackgroundColor = "#2d2230" # Deep lavender blush - gentle, dark contrast
+backgroundColor = "#1e2030"
+secondaryBackgroundColor = "#363a4f"

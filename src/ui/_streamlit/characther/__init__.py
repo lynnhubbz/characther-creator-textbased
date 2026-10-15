@@ -3,8 +3,8 @@ from typing import Any, Dict, Literal, Optional, Tuple, get_args, get_origin
 import streamlit as st
 from pydantic import BaseModel, Field
 
-from ....core import base
-from .widgets import *
+from src.core import base
+from src.ui._streamlit.widgets import *
 
 # Store uploaded  character data in session state
 if "character" not in st.session_state:
