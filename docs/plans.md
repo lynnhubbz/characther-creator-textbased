@@ -29,7 +29,7 @@
    2. Add logo: script and quill
    3. Add image so user can better imagine it
 1. Preparing for pluginization by:
-   1. Adding home page before entering the character creation
+   1. [X] Adding home page before entering the character creation
 
 ## In-Dev  Update 2
 
@@ -57,12 +57,18 @@
 7. generate obsidian markdown character document
 8. embed typst for pdfs
 
+## In-Dev Update 4
+
+0. pyside6 build
+1. pyside6 fixes
+
 ## Major Update 1
 
 0. MAJOR BREAKING CHANGE
    1. Refactors
    2. Performance
    3. Documentation
+
 1. Minor Update 1
    1. Randomizer Generator
    2. (ALREADY IMPLEMENTED TEMPORARYLY) Themes so it doesnt be boring
