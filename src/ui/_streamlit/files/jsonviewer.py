@@ -9,8 +9,8 @@ from src.core.filemanager import *
 jsonindent = 4
 
 def render_exportpage():
-    char = st.session_state.character
-    assets_dict = st.session_state.get("pending_assets", {})
+    char = get_char()
+    assets_dict = get_assets()    
 
     json_str = char.model_dump_json(indent=4)
     zip_bytes = create_character_bundle(

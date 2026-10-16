@@ -7,15 +7,13 @@ from src.core.character import base
 from src.ui._streamlit.widgets import *
 
 # Store uploaded  character data in session state
-if "character" not in st.session_state:
-    st.session_state.character = base.CharacterData()
-
+def get_char() -> base.CharacterData:
+    if "character" not in st.session_state:
+        st.session_state.character = base.CharacterData()
+    return st.session_state.character
 # Store uploaded assets bytes in session state
-if "pending_assets" not in st.session_state:
-    st.session_state.pending_assets = {}
-
-char: base.CharacterData = st.session_state.character
-
+def get_assets() -> dict:
+    return st.session_state.setdefault("pending_assets", {})
 
 
 # --- 5. Main Streamlit Application ---
@@ -41,7 +39,7 @@ def _auto_render(sections):
                 setattr(section_obj, field_name, new_value)
 
 def render_charactergeneral():
-
+    char = get_char()
     st.caption("lorem ipsum dolor sit amet")
 
     st.divider()
@@ -58,6 +56,7 @@ def render_charactergeneral():
     _auto_render(section2)
 
 def render_characterappearance():
+    char = get_char()
     st.caption("lorem ipsum dolor sit amet")
 
     st.divider()
