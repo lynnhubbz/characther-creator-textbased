@@ -79,7 +79,7 @@ FACE_SHAPE = Optional[Literal[
 HAIR_TYPE = Optional[Literal[
     "(1a) Straight and Fine",
     "(1b) Less Straight",
-    "(1c) Bone Straight"
+    "(1c) Bone Straight",
     
     "(2a) Soft Waves",
     "(2b) Wavy",
