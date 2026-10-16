@@ -7,7 +7,7 @@ from pydantic import BaseModel
 from pydantic.fields import FieldInfo
 from streamlit_sortables import sort_items
 
-from src.core import base
+from src.core.character import base
 
 
 def _is_list_type(annotation: Any) -> bool:

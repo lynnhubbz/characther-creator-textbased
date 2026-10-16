@@ -3,7 +3,7 @@ from typing import Any, Dict, Literal, Optional, Tuple, get_args, get_origin
 import streamlit as st
 from pydantic import BaseModel, Field
 
-from src.ui._streamlit.characther import *
+from src.ui._streamlit.character import *
 from src.core.filemanager import *
 
 jsonindent = 4

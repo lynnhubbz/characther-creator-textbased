@@ -1,9 +1,9 @@
 # src/ui/_streamlit/entry_char.py
 import streamlit as st
 
-from src.ui._streamlit.characther import *
+from src.ui._streamlit.character import *
 from src.ui._streamlit.files.jsonviewer import *
-from src.ui._streamlit.sidebar import *
+from src.ui._streamlit.character.sidebar import *
 from src.ui._streamlit.utils import *
 # Inside src/ui/_streamlit/entry_char.py
 

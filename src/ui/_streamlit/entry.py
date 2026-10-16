@@ -10,7 +10,7 @@ home_page = st.Page(
 )
 
 character_page = st.Page(
-    "src/ui/_streamlit/entry_char.py",  # <-- Points to your workspace file
+    "src/ui/_streamlit/character/entry_char.py",  # <-- Points to your workspace file
     title="Character Hub", 
     url_path="character"
 )

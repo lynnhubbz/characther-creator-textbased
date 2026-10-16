@@ -59,7 +59,7 @@ with col1:
         st.markdown("### 👤 Character Creator")
         st.write("Manage general details, tweak appearance styles, and import/export configurations.")
         if st.button("Enter Workspace →", key="go_to_char"):
-            st.switch_page("src/ui/_streamlit/entry_char.py")
+            st.switch_page("src/ui/_streamlit/character/entry_char.py")
 
 with col2:
     with st.container(border=True):
